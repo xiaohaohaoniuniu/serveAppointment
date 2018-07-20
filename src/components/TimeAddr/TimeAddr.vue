@@ -1,0 +1,97 @@
+<template>
+	<div class="timeaddr">
+		<ul class="choose-box">
+			<li @click="addAddr" class="addAddr">
+				{{NowAddr}}
+				<span>&gt;</span>
+			</li>
+			<li @click="addTime">
+				{{Nowtime}}
+				<span>&gt;</span>
+			</li>
+		</ul>
+		<textarea class="leaveword" placeholder="如有其他要求请留言">
+		</textarea>
+		<!-- 立即预约 -->
+		<a class="choose-btn" href="javascript:;">立即预约</a>
+	</div>
+</template>
+<script>
+	export default {
+		name:'timeAddr',
+		data(){
+			return {
+				// choosetime:'',
+				// addAddrNew:''
+			}
+		},
+		computed:{
+			Nowtime(){
+				if(this.$store.state.chooseTimeNow){
+					return this.$store.state.chooseTimeNow
+				}else{
+					return "请选择时间"
+				}
+				
+			},
+			NowAddr(){
+				if(this.$store.state.addAddrNew){
+					var addr = this.$store.state.addAddrNew.area + this.$store.state.addAddrNew.detailAddr;
+					return addr
+				}else{
+					return "请添加/选择地址"
+				}
+			}
+		},
+		methods:{
+			addAddr(){
+				// 判断，如果有地址就跳到ChooseAddr
+				// 没有就跳到AddAddr
+				this.$router.push({name: 'AddAddr'})
+			},
+			addTime(){
+				this.$router.push({name:'ChooseTime'})
+			}
+		},
+		created(){
+			/*// 时间时间时间时间时
+			var date = this.$route.query.date;
+			var time = this.$route.query.time;
+			this.choosetime = date +" "+ time;
+			// 地址
+			var addr = this.$route.query.addr;
+			this.addAddrNew = addr.area + addr.detailAddr*/
+		}
+	}
+</script>
+<style scoped lang="less">
+	.choose-box{
+		background-color: #fff;
+		border-top: 1px solid #f2f2f2;
+		border-bottom: 1px solid #f2f2f2;
+		padding-left: 10px;
+		overflow:hidden;
+		margin-top: 10px;
+		li{
+			padding: 10px 10px 10px 0;
+			span{
+				float: right;
+				color: #797979;
+			}
+		}
+		.addAddr{
+			border-bottom: 1px solid #f2f2f2;
+		}
+	}
+	.leaveword{
+		width: 100%;
+		height: 80px;
+		padding: 10px;
+		background-color: #fff;
+		border: none;
+		border-top: 1px solid #f2f2f2;
+		border-bottom: 1px solid #f2f2f2;
+		margin-top: 10px;
+		outline: none;
+	}
+</style>
