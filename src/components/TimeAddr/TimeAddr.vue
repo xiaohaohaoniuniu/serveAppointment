@@ -17,6 +17,7 @@
 	</div>
 </template>
 <script>
+	import axios from 'axios'
 	export default {
 		name:'timeAddr',
 		data(){
@@ -47,7 +48,24 @@
 			addAddr(){
 				// 判断，如果有地址就跳到ChooseAddr
 				// 没有就跳到AddAddr
-				this.$router.push({name: 'AddAddr'})
+				axios.get('/addrList.json')
+				.then(res=>{
+					var data = res.data;
+					var addrList = []
+					for(var k in data){
+						data[k].addrId = k;
+						addrList.push(data[k]);
+					}
+					if(addrList.length > 0){
+						this.$router.push({name:'ChooseAddr'})
+					}else{
+						this.$router.push({name: 'AddAddr'})
+					}
+				})
+				.catch(err=>{
+					console.log(err)
+				})
+				
 			},
 			addTime(){
 				this.$router.push({name:'ChooseTime'})

@@ -11,6 +11,7 @@ import QT from '@/components/QT/QT'
 import TimeAddr from '@/components/TimeAddr/TimeAddr'
 import ChooseTime from '@/components/TimeAddr/ChooseTime/ChooseTime'
 import AddAddr from '@/components/TimeAddr/AddChooseAddr/AddAddr'
+import ChooseAddr from '@/components/TimeAddr/AddChooseAddr/ChooseAddr'
 import RepairDetail from '@/components/RepairDetail/RepairDetail'
 
 Vue.use(Router)
@@ -72,6 +73,11 @@ export default new Router({
       path: '/addaddr',
       name: 'AddAddr',
       component: AddAddr
+    },
+    {
+      path: '/chooseaddr',
+      name: 'ChooseAddr',
+      component: ChooseAddr
     }
   ],
   mode: 'history'

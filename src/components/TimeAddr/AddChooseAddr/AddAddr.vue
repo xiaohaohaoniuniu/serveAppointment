@@ -49,23 +49,28 @@
 		},
 		methods:{
 			addAddr(){
-				var addrObj = {
-					name:this.name,
-					sexRadio:this.sexRadio,
-					phone:this.phone,
-					area:this.area,
-					detailAddr:this.detailAddr
+				if(this.name == "" || this.sexRadio=="" || this.phone=="" || this.area == "" || this.detailAddr == ""){
+					alert("请填写完整")
+				}else{
+					var addrObj = {
+						name:this.name,
+						sexRadio:this.sexRadio,
+						phone:this.phone,
+						area:this.area,
+						detailAddr:this.detailAddr
+					}
+					axios.post('/addrList.json',addrObj)
+					.then(res=>{
+						// 添加到野狗
+						this.$router.push({name:'TimeAddr',query:{addr:addrObj}});
+						// 添加到vuex
+						this.$store.commit('addAddr',addrObj);
+					})
+					.catch(err=>{
+						console.log(err)
+					})
 				}
-				axios.post('/addrList.json',addrObj)
-				.then(res=>{
-					// 添加到野狗
-					this.$router.push({name:'TimeAddr',query:{addr:addrObj}});
-					// 添加到vuex
-					this.$store.commit('addAddr',addrObj);
-				})
-				.catch(err=>{
-					console.log(err)
-				})
+				
 			}
 		}
 	}
