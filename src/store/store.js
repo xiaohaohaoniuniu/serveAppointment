@@ -6,7 +6,8 @@ const store = new Vuex.Store({
 		repairList:[],
 		repairIdNow:'',
 		chooseTimeNow:'',
-		addAddrNew:''
+		addAddrNew:'',
+		addrList:[]
 	},
 	mutations:{
 		repairList(state,data){
@@ -20,6 +21,14 @@ const store = new Vuex.Store({
 		},
 		addAddr(state,data){
 			state.addAddrNew = data
+			console.log(state.addAddrNew)
+		},
+		addrList(state,data){
+			state.addrList = data
+		},
+		addrDel(state,data){
+			var index = state.addrList.indexOf(data);
+			state.addrList.splice(index,1)
 		}
 	}
 })

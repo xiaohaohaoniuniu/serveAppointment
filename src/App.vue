@@ -8,6 +8,7 @@ import axios from 'axios'
 export default {
   name: 'App',
   created(){
+    // 修理厂列表
   	axios.get('repairList.json')
   	.then(res=>{
   		// console.log(res.data);

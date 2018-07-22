@@ -13,7 +13,7 @@
 		<textarea class="leaveword" placeholder="如有其他要求请留言">
 		</textarea>
 		<!-- 立即预约 -->
-		<a class="choose-btn" href="javascript:;">立即预约</a>
+		<a @click="appoint" class="choose-btn" href="javascript:;">立即预约</a>
 	</div>
 </template>
 <script>
@@ -24,6 +24,7 @@
 			return {
 				// choosetime:'',
 				// addAddrNew:''
+				// chooseAddr:''
 			}
 		},
 		computed:{
@@ -33,15 +34,16 @@
 				}else{
 					return "请选择时间"
 				}
-				
 			},
 			NowAddr(){
+				var addr;
 				if(this.$store.state.addAddrNew){
-					var addr = this.$store.state.addAddrNew.area + this.$store.state.addAddrNew.detailAddr;
-					return addr
+					addr = this.$store.state.addAddrNew.area + " " + this.$store.state.addAddrNew.detailAddr + "------" +　this.$store.state.addAddrNew.name;
 				}else{
-					return "请添加/选择地址"
+					addr = "请添加/选择地址"
 				}
+				console.log(addr);
+				return addr;
 			}
 		},
 		methods:{
@@ -69,16 +71,13 @@
 			},
 			addTime(){
 				this.$router.push({name:'ChooseTime'})
+			},
+			appoint(){
+				this.$router.push({name:'MyAppoint'})
 			}
 		},
 		created(){
-			/*// 时间时间时间时间时
-			var date = this.$route.query.date;
-			var time = this.$route.query.time;
-			this.choosetime = date +" "+ time;
-			// 地址
-			var addr = this.$route.query.addr;
-			this.addAddrNew = addr.area + addr.detailAddr*/
+			
 		}
 	}
 </script>
