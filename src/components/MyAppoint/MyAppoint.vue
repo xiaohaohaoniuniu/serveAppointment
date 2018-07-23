@@ -3,19 +3,21 @@
 		<ul class="appoint-nav">
 			<li>
 				<router-link :to="{name:'AppointAll'}">
-					<span class="appoint-icon one"></span>
+					<span class="appoint-icon one">
+						
+					</span>
 					<p>所有预约</p>
 				</router-link>
 			</li>
 			<li>
 				<router-link :to="{name:'AppointPay'}">
-					<span class="appoint-icon two"></span>
+					<span class="appoint-icon two"><font>{{payCount}}</font></span>
 					<p>待付款</p>
 				</router-link>
 			</li>
 			<li>
 				<router-link :to="{name:'AppointIng'}">
-					<span class="appoint-icon three"></span>
+					<span class="appoint-icon three"><font>{{ingCount}}</font></span>
 					<p>进行中</p>
 				</router-link>
 			</li>
@@ -35,6 +37,14 @@
 		name:'appoint',
 		data(){
 			return {
+			}
+		},
+		computed:{
+			payCount(){
+				return this.$store.state.payCount
+			},
+			ingCount(){
+				return this.$store.state.ingCount
 			}
 		},
 		components:{
@@ -64,11 +74,14 @@
     	li{
     		flex: 1;
     		text-align: center;
-    		padding:15px 0;
+    		
     	}
     	a{
+    		width: 100%;
+    		height: 100%;
     		display: inline-block;
     		color: #323232;
+    		padding:15px 0;
     	}
     	/* 选中变图 */
     	a.router-link-active{
@@ -83,6 +96,19 @@
     		height: 21px;
     		margin: 0 auto;
     		background-position: top center;
+    		position: relative;
+    	}
+    	.appoint-icon font{
+    		padding: 0px 4.5px;
+		    font-size: 10px;
+		    text-align: center;
+		    line-height: 15px;
+		    background-color: red;
+		    color: #fff;
+		    border-radius: 360px;
+		    position: absolute;
+		    right: -5px;
+		    top: -5px;
     	}
     	.one{
 			background: url('../../assets/appoint-all.png') no-repeat;

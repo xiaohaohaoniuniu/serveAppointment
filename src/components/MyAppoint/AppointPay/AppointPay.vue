@@ -30,10 +30,10 @@
 		computed:{
 			AppointEvaluateList(){
 				var appointList = this.$store.state.appointListData;
-				console.log(appointList);
 				var AppointEvaluateData = appointList.filter(function(item) {
 						return item.state == this.state;
 					}.bind(this));
+				this.$store.commit('PayCount',AppointEvaluateData.length);
 				return AppointEvaluateData;
 			}
 		}

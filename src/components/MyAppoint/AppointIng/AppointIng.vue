@@ -34,6 +34,7 @@
 				var AppointEvaluateData = appointList.filter(function(item) {
 						return item.state == this.state;
 					}.bind(this));
+				this.$store.commit('IngCount',AppointEvaluateData.length);
 				return AppointEvaluateData;
 			}
 		}

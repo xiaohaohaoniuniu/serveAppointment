@@ -10,7 +10,9 @@ const store = new Vuex.Store({
 		addAddrNew:'',
 		addrList:[],
 		nowProject:'维修',
-		appointListData:[]
+		appointListData:[],
+		payCount:0,
+		ingCount:0
 	},
 	mutations:{
 		repairList(state,data){
@@ -45,6 +47,12 @@ const store = new Vuex.Store({
 		// 从TimeAddr过来新加的数据
 		addAppointList(state,data){
 			state.appointListData.push(data)
+		},
+		PayCount(state,data){
+			state.payCount = data;
+		},
+		IngCount(state,data){
+			state.ingCount = data;
 		}
 	},
 	plugins: [VuexPersistedstate()] 
