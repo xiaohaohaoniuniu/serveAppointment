@@ -44,6 +44,11 @@
 <script>
 	export default {
 		name:'wx',
+    data(){
+      return {
+        project:'维修'
+      }
+    },
 		computed:{
 			repairList(){
 				return this.$store.state.repairList
@@ -55,10 +60,11 @@
 		},
 		methods:{
 			repairDeatil(id){
+        // 把选择的项目传给vuex
+        this.$store.commit("project",this.project)
 				this.$router.push({name:'RepairDetail',query:{repairId:id}})
 			}
 		}
-		
 	}
 </script>
 <style lang="less" scoped>

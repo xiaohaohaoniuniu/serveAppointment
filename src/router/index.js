@@ -91,25 +91,25 @@ export default new Router({
       path: '/myappoint',
       name: 'MyAppoint',
       component: MyAppoint,
-      redirect: '/myappoint/appointall',
+      redirect: '/appointall',
       children:[
         {
-          path: '/myappoint/appointall',
+          path: '/appointall',
           name: 'AppointAll',
           component: AppointAll
         },
         {
-          path: '/myappoint/appointpay',
+          path: '/appointpay',
           name: 'AppointPay',
           component: AppointPay
         },
         {
-          path: '/myappoint/appointing',
+          path: '/appointing',
           name: 'AppointIng',
           component: AppointIng
         },
         {
-          path: '/myappoint/appointevaluate',
+          path: '/appointevaluate',
           name: 'AppointEvaluate',
           component: AppointEvaluate
         }
@@ -118,8 +118,7 @@ export default new Router({
     {
        path: '*',
        component: ErrorPage
-    }
-    
+    } 
   ],
   mode: 'history'
 })

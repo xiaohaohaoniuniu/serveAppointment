@@ -10,7 +10,7 @@
 				<span>&gt;</span>
 			</li>
 		</ul>
-		<textarea class="leaveword" placeholder="如有其他要求请留言">
+		<textarea class="leaveword" placeholder="如有其他要求请留言" v-model="leaveWord">
 		</textarea>
 		<!-- 立即预约 -->
 		<a @click="appoint" class="choose-btn" href="javascript:;">立即预约</a>
@@ -25,6 +25,7 @@
 				// choosetime:'',
 				// addAddrNew:''
 				// chooseAddr:''
+				leaveWord:''
 			}
 		},
 		computed:{
@@ -42,7 +43,6 @@
 				}else{
 					addr = "请添加/选择地址"
 				}
-				console.log(addr);
 				return addr;
 			}
 		},
@@ -73,6 +73,26 @@
 				this.$router.push({name:'ChooseTime'})
 			},
 			appoint(){
+				// 需要数据生成一条预约传给野狗保存
+				// 项目，时间，地址，留言，预约号，状态，价格
+				var myDate = new Date();
+				var newAppointList = {
+					'project':this.$store.state.nowProject,
+					'time':this.Nowtime,
+					'addr':this.NowAddr,
+					'leaveWord':this.leaveWord,
+					'serviceNmber':myDate.getTime(),
+					'state':'进行中',
+					'price':'300'
+				}
+				axios.post('/appointList.json',newAppointList)
+				.then(res=>{
+
+					this.$store.commit('addAppointList',newAppointList);
+				})
+				.catch(err=>{
+					console.log(err)
+				})
 				this.$router.push({name:'MyAppoint'})
 			}
 		},

@@ -10,7 +10,7 @@
 			<li>
 				<router-link :to="{name:'AppointPay'}">
 					<span class="appoint-icon two"></span>
-					<p>代付款</p>
+					<p>待付款</p>
 				</router-link>
 			</li>
 			<li>
@@ -30,10 +30,30 @@
 	</div>
 </template>
 <script>
+	import axios from 'axios'
 	export default {
 		name:'appoint',
+		data(){
+			return {
+			}
+		},
 		components:{
 			
+		},
+		created(){
+			axios.get('/appointList.json')
+			.then(res=>{
+				var appointList = [];
+				if(res.data){
+					for(var k in res.data){
+						res.data[k].appointId = k;
+						appointList.push(res.data[k]);
+					}
+				}else{
+					appointList = []
+				}
+				this.$store.commit('appointList',appointList)
+			})
 		}
 	}
 </script>
@@ -51,7 +71,10 @@
     		color: #323232;
     	}
     	/* 选中变图 */
-		a.router-link-active .iconimg{
+    	a.router-link-active{
+    		color: #2fbe9a;
+    	}
+		a.router-link-active .appoint-icon{
 			background-position: bottom center !important;
 		}
     	.appoint-icon{
