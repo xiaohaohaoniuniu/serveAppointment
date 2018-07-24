@@ -21,6 +21,8 @@ import AppointAll from '@/components/MyAppoint/AppointAll/AppointAll'
 import AppointPay from '@/components/MyAppoint/AppointPay/AppointPay'
 import AppointIng from '@/components/MyAppoint/AppointIng/AppointIng'
 import AppointEvaluate from '@/components/MyAppoint/AppointEvaluate/AppointEvaluate'
+// 支付
+import GotoPay from '@/components/MyAppoint/AppointPay/GotoPay'
 
 Vue.use(Router)
 
@@ -87,6 +89,7 @@ export default new Router({
       name: 'ChooseAddr',
       component: ChooseAddr
     },
+    // 我的预约系列
     {
       path: '/myappoint',
       name: 'MyAppoint',
@@ -114,6 +117,12 @@ export default new Router({
           component: AppointEvaluate
         }
       ]
+    },
+    // 支付
+    {
+      path: '/gotopay',
+      name: 'GotoPay',
+      component: GotoPay
     },
     {
        path: '*',

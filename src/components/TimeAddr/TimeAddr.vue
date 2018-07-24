@@ -82,7 +82,7 @@
 					'addr':this.NowAddr,
 					'leaveWord':this.leaveWord,
 					'serviceNmber':myDate.getTime(),
-					'state':'进行中',
+					'state':'待付款',
 					'price':'300'
 				}
 				axios.post('/appointList.json',newAppointList)

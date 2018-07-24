@@ -64,6 +64,9 @@
 				}
 				this.$store.commit('appointList',appointList)
 			})
+
+			var serviceNmber = this.$route.query.serviceNmber;
+			console.log(serviceNmber);
 		}
 	}
 </script>

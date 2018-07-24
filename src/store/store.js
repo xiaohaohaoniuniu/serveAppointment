@@ -42,7 +42,6 @@ const store = new Vuex.Store({
 		// 我的预约列表
 		appointList(state,data){
 			state.appointListData = data;
-			console.log(state.appointListData)
 		},
 		// 从TimeAddr过来新加的数据
 		addAppointList(state,data){

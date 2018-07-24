@@ -11,7 +11,7 @@
 					<p>总价：<span>￥{{appoint.price}}</span></p>
 				</div>
 				<div class="appoint-btn">
-					<a class="complete" href="javascript:;">去付款</a>
+					<a @click="pay(appoint)" class="complete" href="javascript:;">去付款</a>
 					<a class="again-appoint" href="javascript:;">再次预约</a>
 				</div>
 			</li>
@@ -33,8 +33,13 @@
 				var AppointEvaluateData = appointList.filter(function(item) {
 						return item.state == this.state;
 					}.bind(this));
-				this.$store.commit('PayCount',AppointEvaluateData.length);
+				this.$store.commit('PayCount',AppointEvaluateData.length)
 				return AppointEvaluateData;
+			}
+		},
+		methods:{
+			pay(appoint){
+				this.$router.push({name:'GotoPay',query:{"serviceNmber":appoint.serviceNmber,'price':appoint.price}})
 			}
 		}
 	}
