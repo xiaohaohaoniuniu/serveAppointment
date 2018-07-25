@@ -61,8 +61,9 @@
 		methods:{
 			repairDeatil(id){
         // 把选择的项目传给vuex
-        this.$store.commit("project",this.project)
-				this.$router.push({name:'RepairDetail',query:{repairId:id}})
+        this.$store.commit("project",this.project);
+        this.$store.commit('NowRepairId',id);
+				this.$router.push({name:'RepairDetail'});
 			}
 		}
 	}

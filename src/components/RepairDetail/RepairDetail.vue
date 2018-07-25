@@ -79,7 +79,7 @@ export default {
     }
   },
   created() {
-    var repairId = this.$route.query.repairId;
+    var repairId = this.$store.state.repairIdNow;
     axios.get('/repairList/' + repairId + '.json')
       .then(res => {
         this.repairNow = res.data;

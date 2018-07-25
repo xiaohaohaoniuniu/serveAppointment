@@ -11,13 +11,15 @@
 			</li>
 			<li>
 				<router-link :to="{name:'AppointPay'}">
-					<span class="appoint-icon two"><font>{{payCount}}</font></span>
+					<span class="appoint-icon two">
+						<font v-if="!!payCount">{{payCount}}</font>
+					</span>
 					<p>待付款</p>
 				</router-link>
 			</li>
 			<li>
 				<router-link :to="{name:'AppointIng'}">
-					<span class="appoint-icon three"><font>{{ingCount}}</font></span>
+					<span class="appoint-icon three"><font v-if="!!ingCount">{{ingCount}}</font></span>
 					<p>进行中</p>
 				</router-link>
 			</li>
@@ -49,7 +51,7 @@
 		},
 		components:{
 			
-		},
+		},              
 		created(){
 			axios.get('/appointList.json')
 			.then(res=>{
@@ -62,11 +64,38 @@
 				}else{
 					appointList = []
 				}
-				this.$store.commit('appointList',appointList)
-			})
+				
+				// 得到付款页面传参
+				var FkserviceNmber = this.$route.query.serviceNmber;
+				if(FkserviceNmber){
+					var changeState = appointList.filter(function(index) {
+						// console.log(index.serviceNmber)
+						return index.serviceNmber == FkserviceNmber;
+					});
+					changeState[0].state = "进行中";
+					// console.log(changeState)
+					// 先删除
+					axios.delete('/appointList/' + changeState[0].appointId + ".json")
+					.then(res=>{
+						console.log('删除成功')
+					})
+					// 然后在写入
+					axios.post('/appointList.json',changeState[0])
+					.then(res=>{
+						console.log("写入成功");
+					})
+				}
 
-			var serviceNmber = this.$route.query.serviceNmber;
-			console.log(serviceNmber);
+				// 得到评价页面传参
+				var PjServiceNmber = this.$route.query.serviceId;
+				console.log(PjServiceNmber);
+				
+				// 
+				// 
+				// 
+				// 最后将改变后的值写入
+				this.$store.commit('appointList',appointList);
+			})	
 		}
 	}
 </script>

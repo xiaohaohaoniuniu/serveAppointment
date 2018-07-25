@@ -1,6 +1,6 @@
 <template>
 	<div class="pay">
-		<ul class="appointList">
+		<ul class="appointList" v-if="AppointEvaluateList.length>0">
 			<li v-for="appoint in AppointEvaluateList">
 				<p class="appoint-code">
 					预约ID号：{{appoint.serviceNmber}} 
@@ -11,11 +11,14 @@
 					<p>总价：<span>￥{{appoint.price}}</span></p>
 				</div>
 				<div class="appoint-btn">
-					<a @click="pay(appoint)" class="complete" href="javascript:;">去付款</a>
+					<a @click="pay(appoint)" class="complete" href="javascript:;">{{appoint.state}}</a>
 					<a class="again-appoint" href="javascript:;">再次预约</a>
 				</div>
 			</li>
 		</ul>
+		<div class="noitem" v-else>
+			暂无待付款的预约
+		</div>
 	</div>
 </template>
 <script>

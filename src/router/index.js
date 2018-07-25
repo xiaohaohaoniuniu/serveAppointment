@@ -21,6 +21,8 @@ import AppointAll from '@/components/MyAppoint/AppointAll/AppointAll'
 import AppointPay from '@/components/MyAppoint/AppointPay/AppointPay'
 import AppointIng from '@/components/MyAppoint/AppointIng/AppointIng'
 import AppointEvaluate from '@/components/MyAppoint/AppointEvaluate/AppointEvaluate'
+// 评价
+import Evaluate from '@/components/MyAppoint/AppointEvaluate/Evaluate'
 // 支付
 import GotoPay from '@/components/MyAppoint/AppointPay/GotoPay'
 
@@ -123,6 +125,12 @@ export default new Router({
       path: '/gotopay',
       name: 'GotoPay',
       component: GotoPay
+    },
+    // 评价Evaluate
+    {
+      path: '/evaluate',
+      name: 'Evaluate',
+      component: Evaluate
     },
     {
        path: '*',

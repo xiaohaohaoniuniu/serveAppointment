@@ -19,7 +19,8 @@ const store = new Vuex.Store({
 			state.repairList=data
 		},
 		NowRepairId(state,data){
-			state.repairIdNow=data
+			state.repairIdNow=data;
+			console.log(state.repairIdNow);
 		},
 		chooseTime(state,data){
 			state.chooseTimeNow = data	

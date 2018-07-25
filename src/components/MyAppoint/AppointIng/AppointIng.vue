@@ -1,6 +1,6 @@
 <template>
 	<div class="ing">
-		<ul class="appointList">
+		<ul class="appointList" v-if="AppointEvaluateList.length>0">
 			<li v-for="appoint in AppointEvaluateList">
 				<p class="appoint-code">
 					预约ID号：{{appoint.serviceNmber}} 
@@ -16,6 +16,9 @@
 				</div>
 			</li>
 		</ul>
+		<div class="noitem" v-else>
+			暂无进行中的预约
+		</div>
 	</div>
 </template>
 <script>
@@ -30,7 +33,6 @@
 		computed:{
 			AppointEvaluateList(){
 				var appointList = this.$store.state.appointListData;
-				console.log(appointList);
 				var AppointEvaluateData = appointList.filter(function(item) {
 						return item.state == this.state;
 					}.bind(this));
