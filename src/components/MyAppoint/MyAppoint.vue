@@ -84,12 +84,29 @@
 					.then(res=>{
 						console.log("写入成功");
 					})
-				}
+				} 
 
 				// 得到评价页面传参
 				var PjServiceNmber = this.$route.query.serviceId;
 				console.log(PjServiceNmber);
-				
+				if(PjServiceNmber){
+					var PjchangeState = appointList.filter(function(index) {
+						// console.log(index.serviceNmber)
+						return index.serviceNmber == PjServiceNmber;
+					});
+					PjchangeState[0].state = "已完成";
+					// console.log(changeState)
+					// 先删除
+					axios.delete('/appointList/' + PjchangeState[0].appointId + ".json")
+					.then(res=>{
+						console.log('评价删除成功')
+					})
+					// 然后在写入
+					axios.post('/appointList.json',PjchangeState[0])
+					.then(res=>{
+						console.log("已完成写入成功");
+					})
+				} 
 				// 
 				// 
 				// 

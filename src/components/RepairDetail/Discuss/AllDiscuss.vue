@@ -38,11 +38,9 @@
 	</div>
 </template>
 <script>
+	import axios from 'axios'
 	var discussList = [
-		{'good':true,'phone':'9876***21','cost':'280','time':'2018-05-06','content':'修车不错，修理厂不错，还好，很好，好修车不错，修理厂不错，还好，很好，好修车不错，修理厂不错，还好，很好，好修车不错，修理厂不错，还好，很好，好'},
-		{'good':false,phone:'12***789','cost':'280','time':'2018-05-06','content':'修车不错修理厂不错还好很好好'},
-		{'good':true,phone:'67***89','cost':'280','time':'2018-05-06','content':'修车不错修理厂不错还好很好好'},
-		{'good':false,phone:'234***789','cost':'280','time':'2018-05-06','content':'修车不错修理厂不错还好很好好'}
+		{'good':true,'phone':'9876***21','cost':'280','time':'2018-05-06'}
 	]
 	export default {
 		name:'alldiscuss',
@@ -52,7 +50,13 @@
 				filtrate:discussList,
 				allCount:0,
 				goodCount:0,
-				badCount:0
+				badCount:0,
+				nowEvaluate:[]
+			}
+		},
+		computed:{
+			repairIdNow(){
+				return this.$store.state.repairIdNow
 			}
 		},
 		watch:{
@@ -80,6 +84,23 @@
 			}
 		},
 		created(){
+			// var comment = 
+			axios.get('/evaluateList.json')
+			.then(res=>{
+				var List = [];
+				for(var k in res.data){
+					res.data[k].id=k;
+					List.push(res.data[k]);
+				}
+				var nowEvaluate = List.filter((item)=>{
+					return item.repairId == this.repairIdNow;
+				});
+				this.nowEvaluate = nowEvaluate;
+			})
+			.catch(err=>{
+				console.log(err)
+			})
+
 			// 总评
 			this.allCount = discussList.length;
 			// 好评

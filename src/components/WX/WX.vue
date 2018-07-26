@@ -92,7 +92,7 @@
 
 .isjoin {
   display: flex;
-  background-color: #fff;
+  background-color: #fff;    
   border-top: 1px solid #f2f2f2;
   li {
     flex: 1;
@@ -106,7 +106,7 @@
     vertical-align: middle;
     border-radius: 360px;
     margin-right: 10px;
-    border: 1px solid #f2f2f2;
+    border: 1px solid #ddd;
   }
   input[type="radio"] {
     margin: 0;
