@@ -20,7 +20,6 @@ const store = new Vuex.Store({
 		},
 		NowRepairId(state,data){
 			state.repairIdNow=data;
-			console.log(state.repairIdNow);
 		},
 		chooseTime(state,data){
 			state.chooseTimeNow = data	

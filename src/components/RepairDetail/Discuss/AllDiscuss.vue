@@ -35,23 +35,26 @@
         		</p>
         	</li>
         </ul>
+        <div class="nodiscuss" v-show="nodiscuss">暂无评论 ~ </div>
 	</div>
 </template>
 <script>
 	import axios from 'axios'
-	var discussList = [
+	/*var discussList = [
 		{'good':true,'phone':'9876***21','cost':'280','time':'2018-05-06'}
-	]
+	]*/
 	export default {
 		name:'alldiscuss',
 		data(){
 			return {
 				discuss:"all",
-				filtrate:discussList,
+				discussList:[],
+				filtrate:[],
 				allCount:0,
-				goodCount:0,
+				goodCount:0,          
 				badCount:0,
-				nowEvaluate:[]
+				nowEvaluate:[],
+				nodiscuss:false
 			}
 		},
 		computed:{
@@ -60,59 +63,74 @@
 			}
 		},
 		watch:{
-			discuss:{
+			discuss:{  
 				handler:function(){
-					console.log("变化了");
 					if(this.discuss == "all"){
-						this.filtrate = discussList
+						this.filtrate = this.discussList
 					}if(this.discuss == "good"){
 						var goodDiscuss=[];
 						// this.filtrate筛选出good：true的数据
-						for(var i=0;i<discussList.length;i++){
-							if(discussList[i].good == true){
-								goodDiscuss.push(discussList[i])
+						for(var i=0;i<this.discussList.length;i++){
+							if(this.discussList[i].good == true){
+								goodDiscuss.push(this.discussList[i])
 							}
 						}
 						this.filtrate = goodDiscuss
 					}if(this.discuss == "bad"){
-						var badDiscuss = discussList.filter(function(item) {
-							return item.good == false;
+						var badDiscuss = this.discussList.filter(function(item) {
+							return item.good == false; 
 						});
 						this.filtrate = badDiscuss
 					}
 				}
-			}
+			} 
 		},
 		created(){
-			// var comment = 
+			var discussL;
 			axios.get('/evaluateList.json')
 			.then(res=>{
-				var List = [];
-				for(var k in res.data){
-					res.data[k].id=k;
-					List.push(res.data[k]);
-				}
-				var nowEvaluate = List.filter((item)=>{
-					return item.repairId == this.repairIdNow;
-				});
-				this.nowEvaluate = nowEvaluate;
+					var List = [];
+					for(var k in res.data){
+						res.data[k].id=k;
+						List.push(res.data[k]);
+					}
+					var nowEvaluate = List.filter((item)=>{
+						return item.repairId == this.repairIdNow;
+					});
+					if(nowEvaluate.length>0){
+						discussL = []
+						for(var i=0;i<nowEvaluate.length;i++){
+							if(nowEvaluate[i].leaveWord == ''){
+								nowEvaluate[i].leaveWord = "主人很懒，没有留下什么"
+							}
+							if(i%2==0){
+								discussL.push({'good':true,'phone':'9876***21','cost':'280','time':'2018-05-06','content':nowEvaluate[i].leaveWord})
+							}else{
+								discussL.push({'good':false,'phone':'9876***21','cost':'280','time':'2018-05-06','content':nowEvaluate[i].leaveWord})
+							}
+						}
+						this.discussList = discussL;
+						this.filtrate = this.discussList;
+						// 总评
+						this.allCount = discussL.length;
+						// 好评
+						var goodC = discussL.filter(function(item){
+							return item.good == true
+						})
+						this.goodCount = goodC.length;
+						// 差评
+						var badC = discussL.filter(function(item){
+						return item.good == false
+						})
+						this.badCount = badC.length;
+					}else{
+						this.nodiscuss = true
+					}
+					
 			})
 			.catch(err=>{
 				console.log(err)
-			})
-
-			// 总评
-			this.allCount = discussList.length;
-			// 好评
-			var goodC = discussList.filter(function(item){
-				return item.good == true
-			})
-			this.goodCount = goodC.length;
-			// 差评
-			var badC = discussList.filter(function(item){
-				return item.good == false
-			})
-			this.badCount = badC.length;
+			})	
 		}
 	}
 </script>
@@ -157,5 +175,9 @@
 				line-height: 1.5;
 			}
 		}
+	}
+	.nodiscuss{
+		text-align:center;
+		margin:20px 0;
 	}
 </style>

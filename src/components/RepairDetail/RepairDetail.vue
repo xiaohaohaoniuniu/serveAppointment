@@ -38,11 +38,11 @@
           	</template>
           </div>
           <span class="number">{{wxGrade}}分</span>
-        </div>
+        </div>       
         <div class="vip-wx-fw">
           <span>服务满意度</span>
           <div class="star-box">
-            <template v-for="n in fwGrade">
+            <template v-for="n in fwGrade"> 
           		<img src="../../assets/star1.png">
           	</template>
             <template v-for="n in 5-fwGrade">
@@ -69,8 +69,13 @@ export default {
       repairNow: {},
       allGrade: 0,
       repairAction: [],
-      wxGrade:0,
+      wxGrade:0,  
       fwGrade:0
+    }
+  },
+  computed:{
+    repairIdNow(){
+      return this.$store.state.repairIdNow
     }
   },
   methods:{
@@ -81,16 +86,43 @@ export default {
   created() {
     var repairId = this.$store.state.repairIdNow;
     axios.get('/repairList/' + repairId + '.json')
-      .then(res => {
-        this.repairNow = res.data;
-        // 系统星星
-        this.allGrade = parseInt(this.repairNow.repairAllGrade);
-        // 主营项目
-        this.repairAction = this.repairNow.repairAction.split(',');
-        // 维修满意度
-        this.wxGrade = parseInt(this.repairNow.repairWxGrade);
-        this.fwGrade = parseInt(this.repairNow.repairFwGrade);
-      })
+    .then(res => {
+      this.repairNow = res.data;
+      // 系统星星
+      this.allGrade = parseInt(this.repairNow.repairAllGrade);
+      // 主营项目
+      this.repairAction = this.repairNow.repairAction.split(',');
+      
+    })
+    // 评价小星星
+    axios.get('/evaluateList.json')
+    .then(res=>{
+        var List = [];
+        for(var k in res.data){
+          res.data[k].id=k;
+          List.push(res.data[k]);
+        }
+        var nowEvaluate = List.filter((item)=>{
+          return item.repairId == this.repairIdNow;
+        });
+        if(nowEvaluate.length>0){
+          var wxGrade = 0;
+          var fwGrade = 0;
+          for(var i=0;i<nowEvaluate.length;i++){
+            wxGrade += nowEvaluate[i].wxStarCount
+            fwGrade += nowEvaluate[i].fwStarCount
+          }
+
+          // 维修满意度
+          this.wxGrade = parseInt(wxGrade/nowEvaluate.length);
+          this.fwGrade = parseInt(fwGrade/nowEvaluate.length);
+        }else{
+          // 没有评论的话就默认是总评分的小星星
+          // 维修满意度
+          this.wxGrade = parseInt(this.repairNow.repairAllGrade);
+          this.fwGrade = parseInt(this.repairNow.repairAllGrade);
+        }   
+    })
   },
   components:{
   	AllDiscuss
