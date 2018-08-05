@@ -7,7 +7,8 @@ const store = new Vuex.Store({
 		repairList:[],
 		repairIdNow:'',
 		chooseTimeNow:'',
-		addAddrNew:'',
+		addAddrNew:'',//选择地址之后携带的地址详细参数
+		editAddrNow:'',
 		addrList:[],
 		nowProject:'维修',
 		appointListData:[],
@@ -25,8 +26,14 @@ const store = new Vuex.Store({
 			state.chooseTimeNow = data	
 		},
 		addAddr(state,data){
-			state.addAddrNew = data
-			// console.log(state.addAddrNew)
+			// 从ChooseAddr页面传过来的详细地址
+			state.addAddrNew = data;
+			// console.log(data)
+		},
+		editAddr(state,data){
+			// 从ChooseAddr页面传过来的
+			state.editAddrNow = data;
+			console.log(data)
 		},
 		addrList(state,data){
 			state.addrList = data

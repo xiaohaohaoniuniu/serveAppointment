@@ -22,9 +22,6 @@
 		name:'timeAddr',
 		data(){
 			return {
-				// choosetime:'',
-				// addAddrNew:''
-				// chooseAddr:''
 				leaveWord:''
 			}
 		},

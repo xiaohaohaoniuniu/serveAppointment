@@ -97,13 +97,14 @@
 					var nowEvaluate = List.filter((item)=>{
 						return item.repairId == this.repairIdNow;
 					});
+					console.log(nowEvaluate);
 					if(nowEvaluate.length>0){
 						discussL = []
 						for(var i=0;i<nowEvaluate.length;i++){
 							if(nowEvaluate[i].leaveWord == ''){
 								nowEvaluate[i].leaveWord = "主人很懒，没有留下什么"
 							}
-							if(i%2==0){
+							if(nowEvaluate[i].fwStarCount + nowEvaluate[i].wxStarCount>6){
 								discussL.push({'good':true,'phone':'9876***21','cost':'280','time':'2018-05-06','content':nowEvaluate[i].leaveWord})
 							}else{
 								discussL.push({'good':false,'phone':'9876***21','cost':'280','time':'2018-05-06','content':nowEvaluate[i].leaveWord})

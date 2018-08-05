@@ -1,19 +1,19 @@
 <template>
 	<div class="mainnav">
 		<ul class="nav-ul">
-			<li>
+			<!-- <li>
 				<router-link :to="{name:'JoinHelp'}">
 					加入互助
 				</router-link>
-			</li>
+			</li> -->
 			<li>
 				<router-link :to="{name:'Serve'}">
 					服务预约
 				</router-link>
 			</li>
-			<li>
-				<router-link :to="{name:'My'}">
-					我的
+			<li class="MyAppoint">
+				<router-link :to="{name:'MyAppoint'}">
+					我的预约
 				</router-link>
 			</li>
 		</ul>
@@ -26,10 +26,16 @@
 			return {
 
 			}
+		},
+		methods:{
+			
 		}
 	}
 </script>
 <style scoped>
+	.nav-ul .router-link-active{
+    		color: red;
+    	}
 	.mainnav{
 		position: fixed;
 		width: 100%;

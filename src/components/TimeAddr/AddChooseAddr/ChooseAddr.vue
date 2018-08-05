@@ -1,7 +1,7 @@
 <template>
 	<div class="chooseaddr">
 		<ul class="addrList">
-			<li class="addritem" v-for="addr in addrList">
+			<li class="addritem" v-for="addr in addrList" :key="addr.addrId">
 				<p class="name-call">{{addr.name}}<span>{{addr.phone}}</span></p>
 				<p class="addr">{{addr.area}} {{addr.detailAddr}}</p>
 				<div class="operation">
@@ -11,7 +11,7 @@
 						<span>选用地址</span>
 					</label>
 					<p class="edit-del">
-						<a href="javascript:;"><img src="../../../assets/edit.png">编辑</a>
+						<a v-on:click="addrEdit(addr)" href="javascript:;"><img src="../../../assets/edit.png">编辑</a>
 						<a v-on:click="addrDel(addr)" href="javascript:;"><img src="../../../assets/del.png">删除</a>
 					</p>
 				</div>
@@ -62,7 +62,14 @@
 				}	
 			},
 			addbox(){
-				this.$router.push({name:'AddAddr'})
+				this.$router.push({name:'AddAddr'});
+				// 把编辑保存到store的地址给清空
+				this.$store.commit('editAddr',{});
+			},
+			addrEdit(addr){
+				// 把要编辑的地址保存到store.js中
+				this.$store.commit('editAddr',addr);
+				this.$router.push({name:'AddAddr'});
 			}
 		}
 	}
