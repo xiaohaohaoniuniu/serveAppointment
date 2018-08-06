@@ -12,7 +12,7 @@
 				</router-link>
 			</li>
 			<li>
-				<router-link :to="{name:'by'}">
+				<router-link :to="{name:'by',query:{project:'保养'}}">
 					<span class="iconimg two"></span>
 					<p>保养</p>
 				</router-link>

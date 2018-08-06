@@ -1,6 +1,5 @@
 <template>
 	<div class="appoint">
-		<main-nav></main-nav>
 		<ul class="appoint-nav">
 			<li>
 				<router-link :to="{name:'AppointAll'}">
@@ -36,7 +35,6 @@
 </template>
 <script>
 	import axios from 'axios'
-	import MainNav from '../Nav/MainNav'
 	export default {
 		name:'appoint',
 		data(){
@@ -52,7 +50,7 @@
 			}
 		},
 		components:{
-			MainNav
+			
 		},              
 		created(){
 			axios.get('/appointList.json')
@@ -83,7 +81,7 @@
 					})
 					// 然后在写入
 					axios.post('/appointList.json',changeState[0])
-					.then(res=>{
+					.then(res=>{           
 						console.log("写入成功");
 					})
 				} 

@@ -31,8 +31,8 @@ Vue.use(Router)
 export default new Router({
   routes: [{
       path: '/',
-      name: 'JoinHelp',
-      component: JoinHelp
+      name: 'index',
+      redirect: "/serve"
     },
     {
       path: '/serve',
@@ -46,7 +46,7 @@ export default new Router({
       }, {
         path: '/by',
         name: 'by',
-        component: BY
+        component: WX
       }, {
         path: '/yc',
         name: 'yc',

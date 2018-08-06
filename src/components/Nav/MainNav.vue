@@ -34,8 +34,8 @@
 </script>
 <style scoped>
 	.nav-ul .router-link-active{
-    		color: red;
-    	}
+		color: red;
+	}
 	.mainnav{
 		position: fixed;
 		width: 100%;

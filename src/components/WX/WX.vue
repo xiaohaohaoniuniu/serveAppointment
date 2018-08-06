@@ -46,7 +46,7 @@
 		name:'wx',
     data(){
       return {
-        project:'维修'
+       project:'维修'
       }
     },
 		computed:{
@@ -61,7 +61,14 @@
 		methods:{
 			repairDeatil(id){
         // 把选择的项目传给vuex
-        this.$store.commit("project",this.project);
+        var project;
+        if(this.$route.query.project){
+          project = this.$route.query.project
+        }else{
+          project = this.project
+        }
+
+        this.$store.commit("project",project);
         this.$store.commit('NowRepairId',id);
 				this.$router.push({name:'RepairDetail'});
 			}
