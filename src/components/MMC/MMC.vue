@@ -1,5 +1,19 @@
 <template>
 	<div id="mmc">
-		买卖车
+		<time-addr></time-addr>
 	</div>
 </template>
+<script>
+	import TimeAddr from '../TimeAddr/TimeAddr'
+	export default {
+		name:'mmc',
+		data(){
+			return {
+
+			}
+		},
+		components:{
+			TimeAddr
+		}
+	}
+</script>

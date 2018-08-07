@@ -18,19 +18,19 @@
 				</router-link>
 			</li>
 			<li>
-				<router-link :to="{name: 'yc'}">
+				<router-link :to="{name: 'yc',query:{project:'验车'}}">
 					<span class="iconimg three"></span>
 					<p>验车</p>
 				</router-link>
 			</li>
 			<li>
-				<router-link :to="{name:'mmc'}">
+				<router-link :to="{name:'mmc',query:{project:'买卖车'}}">
 					<span class="iconimg four"></span>
 					<p>买卖车</p>
 				</router-link>
 			</li>
 			<li>
-				<router-link :to="{name:'qt'}">
+				<router-link :to="{name:'qt',query:{project:'其他'}}">
 					<span class="iconimg five"></span>
 					<p>其他</p>
 				</router-link>

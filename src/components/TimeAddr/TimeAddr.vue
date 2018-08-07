@@ -70,6 +70,11 @@
 				this.$router.push({name:'ChooseTime'})
 			},
 			appoint(){
+				// 得到project选择的是什么
+				var project = this.$route.query.project;
+				if(project){
+					this.$store.commit("project",project);
+				}
 				// 需要数据生成一条预约传给野狗保存
 				// 项目，时间，地址，留言，预约号，状态，价格
 				var myDate = new Date();
@@ -84,7 +89,6 @@
 				}
 				axios.post('/appointList.json',newAppointList)
 				.then(res=>{
-
 					this.$store.commit('addAppointList',newAppointList);
 				})
 				.catch(err=>{
@@ -94,7 +98,7 @@
 			}
 		},
 		created(){
-			
+
 		}
 	}
 </script>
