@@ -137,5 +137,5 @@ export default new Router({
        component: ErrorPage
     } 
   ],
-  mode: 'history'
+  // mode: 'history'
 })
